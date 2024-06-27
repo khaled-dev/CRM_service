@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Eloquent\Model;
+use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Relations\BelongsTo;
 
 class Opportunity extends Model
 {
@@ -24,14 +25,20 @@ class Opportunity extends Model
      * Probability: Probability of closing the deal successfully.
      */
 
-    /**
-     * lead
-     */
-
     protected $fillable = [
         'deal_value',
         'stage',
         'close_date',
         'probability',
     ];
+
+    /**
+     * the lead of this opportunity.
+     *
+     * @return BelongsTo
+     */
+    public function leads(): BelongsTo
+    {
+        return $this->belongsTo(Lead::class);
+    }
 }

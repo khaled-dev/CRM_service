@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Eloquent\Model;
+use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Relations\BelongsTo;
+use MongoDB\Laravel\Relations\MorphTo;
 
 class Contact extends Model
 {
@@ -20,15 +22,31 @@ class Contact extends Model
      * Account ID: Identifier of the associated account.
      */
 
-
-    /**
-     * account
-     */
-
     protected $fillable = [
         'name',
         'email',
         'phone',
         'position',
     ];
+
+
+    /**
+     * the account of this contact.
+     *
+     * @return BelongsTo
+     */
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    /**
+     * Get the model that the contact belongs to.
+     *
+     * @return MorphTo
+     */
+    public function contactable(): MorphTo
+    {
+        return $this->morphTo(__FUNCTION__, 'contactable_type', 'contactable_id');
+    }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Eloquent\Model;
+use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Relations\BelongsTo;
 
 class Account extends Model
 {
@@ -36,4 +37,13 @@ class Account extends Model
         'status',
     ];
 
+    /**
+     * the User assigned to this account.
+     *
+     * @return BelongsTo
+     */
+    public function assignedTo(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Eloquent\Model;
+use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Relations\BelongsTo;
+use MongoDB\Laravel\Relations\MorphMany;
 
 class Lead extends Model
 {
@@ -32,4 +34,35 @@ class Lead extends Model
         'status',
         'interest_level',
     ];
+
+
+    /**
+     * the User assigned to this lead.
+     *
+     * @return BelongsTo
+     */
+    public function assignedTo(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * the contacts of this Lead.
+     *
+     * @return MorphMany
+     */
+    public function contacts(): MorphMany
+    {
+        return $this->morphMany(Contact::class, 'contactable');
+    }
+
+    /**
+     * the comments of this lead.
+     *
+     * @return MorphMany
+     */
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

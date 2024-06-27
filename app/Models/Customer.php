@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Eloquent\Model;
+use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Relations\HasMany;
+use MongoDB\Laravel\Relations\MorphMany;
 
 class Customer extends Model
 {
@@ -33,14 +35,12 @@ class Customer extends Model
 
     /**
      * comments...
-     * contracts..
+     * contacts..
      * pending requests..
      */
 
     protected $fillable = [
         'name',
-        'email',
-        'telephone',
         'company_name',
         'address',
         'country',
@@ -48,4 +48,34 @@ class Customer extends Model
         'type',
     ];
 
+
+    /**
+     * the contacts of this customer.
+     *
+     * @return MorphMany
+     */
+    public function contacts(): MorphMany
+    {
+        return $this->morphMany(Contact::class, 'contactable');
+    }
+
+    /**
+     * the comments of this customer.
+     *
+     * @return MorphMany
+     */
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * the requests of this customer.
+     *
+     * @return HasMany
+     */
+    public function requests(): HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
 }

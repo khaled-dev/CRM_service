@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Eloquent\Model;
+use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Relations\MorphMany;
 
 class Activity extends Model
 {
@@ -19,11 +20,6 @@ class Activity extends Model
      * Contact ID: Identifier of the associated contact.
      */
 
-
-    /**
-     * Contact
-     */
-
     protected $fillable = [
         'type',
         'outcome',
@@ -31,4 +27,13 @@ class Activity extends Model
         'note'
     ];
 
+    /**
+     * the contacts of this Activity.
+     *
+     * @return MorphMany
+     */
+    public function contacts(): MorphMany
+    {
+        return $this->morphMany(Contact::class, 'contactable');
+    }
 }
