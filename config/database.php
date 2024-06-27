@@ -30,6 +30,16 @@ return [
     */
 
     'connections' => [
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'dsn' => 'mongodb://root:password@db:27017/language_bridge_crm?retryWrites=true&w=majority&authSource=admin',
+            'database' => env('DB_DATABASE', 'language_bridge_crm'),
+//            'host'     => env('DB_HOST', '127.0.0.1'),
+//            'port'     => env('DB_PORT', '27017'),
+//            'database' => env('DB_DATABASE', 'language-bridge-crm'),
+//            'username' => env('DB_USERNAME', 'root'),
+//            'password' => env('DB_PASSWORD', 'password'),
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',

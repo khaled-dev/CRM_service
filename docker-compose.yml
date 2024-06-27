@@ -1,0 +1,39 @@
+version: '3'
+services:
+    app:
+        build: .
+        container_name: language_bridge_crm
+        working_dir: /var/www/html
+        volumes:
+            - ./:/var/www/html
+            - ./storage:/var/www/html/storage
+        networks:
+            - language-bridge-crm-network
+        ports:
+            - "${SERVER_PORT:-8080}:9000"
+        depends_on:
+            - db
+
+    db:
+        image: mongo:latest
+        container_name: language_bridge_db
+        restart: always
+        ports:
+            - "${DB_PORT:-27017}:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: "${DB_USERNAME:-root}"
+            MONGO_INITDB_ROOT_PASSWORD: "${DB_PASSWORD:-password}"
+            MONGO_INITDB_DATABASE: "${DB_DATABASE:-language_bridge_crm}"
+        volumes:
+            - language_bridge_mongo_data:/data/db
+
+        networks:
+            - language-bridge-crm-network
+
+networks:
+    language-bridge-crm-network:
+        driver: bridge
+
+volumes:
+    language_bridge_mongo_data:
+        driver: local
