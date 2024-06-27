@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use HasApiTokens, IdConverter;
+
     public const ADMIN = 'admin';
     public const ACCOUNT_MANGER = 'account_manger';
     public const SALESMAN = 'salesman';
