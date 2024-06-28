@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Customer;
 
 use App\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreCustomerRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,16 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
-            'name' => 'required|max:255',
-            'company_name' => 'required|max:255',
-            'address' => 'required|max:255',
-            'country' => 'required|max:255',
+            'name' => 'nullable|string|max:255',
+            'company_name' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
             'status'  => [
-                'required',
+                'nullable',
+                'string',
                 Rule::in(Customer::STATUS)
             ],
-            'type' => 'required|max:255',
+            'type' => 'nullable|string|max:255',
         ];
     }
 }
