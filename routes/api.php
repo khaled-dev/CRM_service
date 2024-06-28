@@ -3,14 +3,16 @@
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/user', function (Request $request) {
-//    return $request->user();
-//})->middleware('auth:sanctum');
+Route::prefix('customers')->controller(CustomerController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::get('/{customer}', 'show');
+    Route::put('/{customer}', 'update');
+    Route::delete('/{customer}', 'destroy');
 
-Route::get('/customers', [CustomerController::class, 'index']);
-Route::get('/customers/{customer}', [CustomerController::class, 'show']);
-Route::post('/customers', [CustomerController::class, 'store']);
-Route::post('/customers/{customer}/comments', [CustomerController::class, 'addComment']);
+    Route::post('/{customer}/comments', 'addComment');
+    Route::post('/{customer}/requests', 'addRequest');
+});
 
 Route::get('/example', function () {
     return 'Hello, World!';

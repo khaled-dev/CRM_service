@@ -44,7 +44,6 @@ class CustomerController extends Controller
     {
         $comment = $customer->comments()->create($request->all());
 
-
         return new CommentResource($comment);
     }
 
