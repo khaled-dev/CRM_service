@@ -12,7 +12,7 @@ class Opportunity extends Model
 
     protected $collection = 'opportunities';
 
-    public const STAGE = [
+    public const STAGES = [
         'qualification', 'needs analysis', 'proposal', 'negotiation', 'won', 'lost',
     ];
 
@@ -37,7 +37,7 @@ class Opportunity extends Model
      *
      * @return BelongsTo
      */
-    public function leads(): BelongsTo
+    public function lead(): BelongsTo
     {
         return $this->belongsTo(Lead::class);
     }

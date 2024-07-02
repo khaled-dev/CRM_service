@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OpportunityController;
 
 Route::prefix('customers')->controller(CustomerController::class)->group(function () {
     Route::get('/', 'index');
@@ -24,5 +25,13 @@ Route::prefix('leads')->controller(LeadController::class)->group(function () {
 
     Route::post('/{lead}/comments', 'addComment');
     Route::post('/{lead}/assign', 'assignUser');
+});
+
+Route::prefix('opportunities')->controller(OpportunityController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::get('/{opportunity}', 'show');
+    Route::put('/{opportunity}', 'update');
+    Route::delete('/{opportunity}', 'destroy');
 });
 
