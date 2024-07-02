@@ -5,6 +5,7 @@ namespace App\Models;
 use MongoDB\Laravel\Eloquent\Model;
 use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Relations\BelongsTo;
+use MongoDB\Laravel\Relations\HasMany;
 use MongoDB\Laravel\Relations\MorphTo;
 
 class Contact extends Model
@@ -41,12 +42,13 @@ class Contact extends Model
     }
 
     /**
-     * Get the model that the contact belongs to.
+     * the activities of this contact.
      *
-     * @return MorphTo
+     * @return HasMany
      */
-    public function contactable(): MorphTo
+    public function activities(): HasMany
     {
-        return $this->morphTo(__FUNCTION__, 'contactable_type', 'contactable_id');
+        return $this->hasmany(Activity::class);
     }
+
 }

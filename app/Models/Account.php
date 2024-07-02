@@ -5,6 +5,7 @@ namespace App\Models;
 use MongoDB\Laravel\Eloquent\Model;
 use App\Models\Concerns\IdConverter;
 use MongoDB\Laravel\Relations\BelongsTo;
+use MongoDB\Laravel\Relations\HasMany;
 
 class Account extends Model
 {
@@ -45,5 +46,15 @@ class Account extends Model
     public function assignedTo(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * the contacts of this account.
+     *
+     * @return HasMany
+     */
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contact::class);
     }
 }
