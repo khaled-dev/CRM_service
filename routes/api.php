@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\CustomerController;
@@ -33,5 +34,13 @@ Route::prefix('opportunities')->controller(OpportunityController::class)->group(
     Route::get('/{opportunity}', 'show');
     Route::put('/{opportunity}', 'update');
     Route::delete('/{opportunity}', 'destroy');
+});
+
+Route::prefix('accounts')->controller(AccountController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::get('/{account}', 'show');
+    Route::put('/{account}', 'update');
+    Route::delete('/{account}', 'destroy');
 });
 
