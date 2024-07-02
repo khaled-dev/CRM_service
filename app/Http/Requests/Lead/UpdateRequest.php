@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Customer;
+namespace App\Http\Requests\Lead;
 
-use App\Models\Lead;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Customer;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
 {
@@ -24,23 +24,16 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'nullable|string|email|max:255',
-            'phone' => 'nullable|string|max:255',
-            'source' => [
+            'name' => 'nullable|string|max:255',
+            'company_name' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
+            'status'  => [
                 'nullable',
                 'string',
-                Rule::in(Lead::SOURCES)
+                Rule::in(Customer::STATUS)
             ],
-            'interest_level' => [
-                'nullable',
-                'string',
-                Rule::in(Lead::INTERESTS)
-            ],
-            'status' => [
-                'nullable',
-                'string',
-                Rule::in(Lead::STATUS)
-            ],
+            'type' => 'nullable|string|max:255',
         ];
     }
 }

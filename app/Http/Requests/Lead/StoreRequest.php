@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Customer;
+namespace App\Http\Requests\Lead;
 
 use App\Models\Lead;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,20 +24,20 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'nullable|string|email|max:255',
-            'phone' => 'nullable|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'phone' => 'required|string|max:255',
             'source' => [
-                'nullable',
+                'required',
                 'string',
                 Rule::in(Lead::SOURCES)
             ],
             'interest_level' => [
-                'nullable',
+                'required',
                 'string',
                 Rule::in(Lead::INTERESTS)
             ],
             'status' => [
-                'nullable',
+                'required',
                 'string',
                 Rule::in(Lead::STATUS)
             ],

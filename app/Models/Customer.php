@@ -35,7 +35,6 @@ class Customer extends Model
 
     /**
      * comments...
-     * contacts..
      * pending requests..
      */
 
@@ -43,21 +42,12 @@ class Customer extends Model
         'name',
         'company_name',
         'address',
+        'phone',
+        'email',
         'country',
         'status',
         'type',
     ];
-
-
-    /**
-     * the contacts of this customer.
-     *
-     * @return MorphMany
-     */
-    public function contacts(): MorphMany
-    {
-        return $this->morphMany(Contact::class, 'contactable');
-    }
 
     /**
      * the comments of this customer.

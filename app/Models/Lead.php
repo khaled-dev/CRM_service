@@ -14,6 +14,22 @@ class Lead extends Model
     protected $collection = 'leads';
 
 
+    public const STATUS_NEW = 'new';
+    public const STATUS_CONTRACTED = 'contacted';
+    public const STATUS_QUALIFIED = 'qualified';
+    public const STATUS_LOST = 'lost';
+    public const STATUS = [self::STATUS_NEW, self::STATUS_CONTRACTED, self::STATUS_QUALIFIED, self::STATUS_LOST];
+
+    public const SOURCE_WEBSITE = 'website';
+    public const SOURCE_REFERRAL = 'referral';
+    public const SOURCE_EVENT = 'event';
+    public const SOURCES = [self::SOURCE_WEBSITE, self::SOURCE_REFERRAL, self::SOURCE_EVENT];
+
+    public const INTEREST_HIGH = 'high';
+    public const INTEREST_MEDIUM = 'medium';
+    public const INTEREST_LOW = 'low';
+    public const INTERESTS = [self::INTEREST_HIGH, self::INTEREST_MEDIUM, self::INTEREST_LOW];
+
     /**
      * Source: Source of the lead (website, referral, event).
      * Lead Status: Status of the lead (New, Contacted, Qualified, Lost).
@@ -25,13 +41,14 @@ class Lead extends Model
 
     /**
      * Comments
-     * Contact
      * Assigned To
      */
 
     protected $fillable = [
         'source',
         'status',
+        'phone',
+        'email',
         'interest_level',
     ];
 
@@ -43,17 +60,7 @@ class Lead extends Model
      */
     public function assignedTo(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * the contacts of this Lead.
-     *
-     * @return MorphMany
-     */
-    public function contacts(): MorphMany
-    {
-        return $this->morphMany(Contact::class, 'contactable');
+        return $this->belongsTo(User::class, 'user_id', '_id');
     }
 
     /**

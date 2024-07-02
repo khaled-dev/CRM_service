@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, IdConverter;
 
+    protected $collection = 'users';
+
     public const ADMIN = 'admin';
     public const ACCOUNT_MANGER = 'account_manger';
     public const SALESMAN = 'salesman';
