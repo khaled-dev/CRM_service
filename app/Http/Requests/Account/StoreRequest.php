@@ -28,7 +28,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'industry' => 'required|string|max:255',
             'annual_revenue' => 'required|string|max:255',
-            'stage' => [
+            'status' => [
                 'required',
                 'string',
                 Rule::in(Account::STATUS)

@@ -27,7 +27,7 @@ class UpdateRequest extends FormRequest
             'name' => 'nullable|string|max:255',
             'industry' => 'nullable|string|max:255',
             'annual_revenue' => 'nullable|string|max:255',
-            'stage' => [
+            'status' => [
                 'nullable',
                 'string',
                 Rule::in(Account::STATUS)
