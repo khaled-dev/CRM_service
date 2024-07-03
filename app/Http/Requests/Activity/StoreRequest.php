@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Contact;
+namespace App\Http\Requests\Activity;
 
-use App\Models\Account;
+use App\Models\Activity;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,15 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string|max:255',
-            'email' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:255',
-            'position' => 'nullable|string|max:255',
+            'contract_id' => 'required|string|max:255|exists:contracts,_id',
+            'outcome' => 'required|string|max:255',
+            'date' => 'required|date',
+            'note' => 'required|string|max:255',
+            'type' => [
+                'required',
+                'string',
+                Rule::in(Activity::TYPES)
+            ],
         ];
     }
 }

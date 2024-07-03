@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\AccountController;
@@ -44,7 +45,6 @@ Route::prefix('accounts')->controller(AccountController::class)->group(function 
     Route::put('/{account}', 'update');
     Route::delete('/{account}', 'destroy');
 
-
     Route::prefix('/{account}/contacts')->controller(ContactController::class)->group(function () {
         Route::get('/', 'index');
         Route::post('/', 'store');
@@ -52,6 +52,14 @@ Route::prefix('accounts')->controller(AccountController::class)->group(function 
         Route::put('/{contact}', 'update');
         Route::delete('/{contact}', 'destroy');
     });
+});
+
+Route::prefix('/activity')->controller(ActivityController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::post('/', 'store');
+    Route::get('/{activity}', 'show');
+    Route::put('/{activity}', 'update');
+    Route::delete('/{activity}', 'destroy');
 });
 
 
