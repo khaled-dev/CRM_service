@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\Account;
 
+use App\Http\Requests\BaseRequest;
 use App\Models\Account;
-use App\Models\Opportunity;
 use Illuminate\Validation\Rule;
-use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class StoreRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

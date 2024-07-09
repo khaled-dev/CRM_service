@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Customer;
 
+use App\Http\Requests\BaseRequest;
 use App\Models\Lead;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateRequest extends FormRequest
+class UpdateRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

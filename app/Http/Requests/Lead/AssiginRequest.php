@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Lead;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseRequest;
 
-class AssiginRequest extends FormRequest
+class AssiginRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
