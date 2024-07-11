@@ -287,6 +287,16 @@
                 ],
                 "summary": "Update activity",
                 "operationId": "064379988a5fe2c974ae5ab18f0cddfd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": false,
                     "content": {
@@ -362,6 +372,312 @@
                     }
                 }
             }
+        },
+        "/api/customers": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "List activities",
+                "operationId": "2b23ac696cfd81c23807c2c1fd63b0b0",
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Create customer",
+                "operationId": "428d5533c8386f91d2baf4de69f01468",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "company_name": {
+                                        "description": "The company_name of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "address": {
+                                        "description": "The address of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "phone": {
+                                        "description": "The phone of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "email": {
+                                        "description": "the email of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "country": {
+                                        "description": "the country of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "status": {
+                                        "description": "the status of the customer",
+                                        "type": "string",
+                                        "enum": [
+                                            "potential",
+                                            "current"
+                                        ]
+                                    },
+                                    "type": {
+                                        "description": "the type of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/customers/{id}/comments": {
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Create comment on a customer",
+                "operationId": "37e72aa18e3f8e13d939712773197c3b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "comment": {
+                                        "description": "The comment on the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/customers/{id}/requests": {
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Create request on a customer",
+                "operationId": "89be905df3d12f305132c261bc171591",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "request": {
+                                        "description": "The request on the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/customers/{id}": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Show activity",
+                "operationId": "d51ce35bfe185b82c242dd4443ffba54",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Update customer",
+                "operationId": "07a3f33c1373d3c6a97b7d8846d81472",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "company_name": {
+                                        "description": "The company_name of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "address": {
+                                        "description": "The address of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "phone": {
+                                        "description": "The phone of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "email": {
+                                        "description": "the email of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "country": {
+                                        "description": "the country of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "status": {
+                                        "description": "the status of the customer",
+                                        "type": "string",
+                                        "enum": [
+                                            "potential",
+                                            "current"
+                                        ]
+                                    },
+                                    "type": {
+                                        "description": "the type of the customer",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Customers"
+                ],
+                "operationId": "634844e24d72540f608f7fd297f5d8b0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -372,6 +688,10 @@
         {
             "name": "Activities",
             "description": "Operations about Activities"
+        },
+        {
+            "name": "Customers",
+            "description": "Operations about customers"
         }
     ]
 }
