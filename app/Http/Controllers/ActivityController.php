@@ -84,6 +84,12 @@ class ActivityController extends Controller
      *     path="/api/activities/{id}",
      *     tags={"Activities"},
      *     summary="Update activity",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
      *     @OA\RequestBody(
      *         required=false,
      *         @OA\JsonContent(
