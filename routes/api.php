@@ -54,7 +54,7 @@ Route::prefix('accounts')->controller(AccountController::class)->group(function 
     });
 });
 
-Route::prefix('/activity')->controller(ActivityController::class)->group(function () {
+Route::prefix('/activities')->controller(ActivityController::class)->group(function () {
     Route::get('/', 'index');
     Route::post('/', 'store');
     Route::get('/{activity}', 'show');
