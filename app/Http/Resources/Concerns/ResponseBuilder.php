@@ -5,6 +5,11 @@ namespace App\Http\Resources\Concerns;
 
 class ResponseBuilder
 {
+    /**
+     * Holds the full data of the response.
+     *
+     * @var array
+     */
     private $fullResponse = [];
 
 
