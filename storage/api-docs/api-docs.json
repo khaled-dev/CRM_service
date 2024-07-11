@@ -1,0 +1,191 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "description": "A sample API to demonstrate usage of OpenAPI annotations.",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/accounts": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "List accounts",
+                "operationId": "13efa5706d1fae14fc1cf87c9f6b1427",
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Create account",
+                "operationId": "e974666bc6c050296a8ee09a3ab6533f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the account",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "industry": {
+                                        "description": "The industry of the account",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "annual_revenue": {
+                                        "description": "The annual revenue of the account",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "status": {
+                                        "description": "he status of the account",
+                                        "type": "string",
+                                        "enum": [
+                                            "active",
+                                            "inactive"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/accounts/{id}": {
+            "get": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Show account",
+                "operationId": "552b29d7944dfff7a0c49abc83f44ea5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Update account",
+                "operationId": "9be8085be375b01725706b78df130bca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the account",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "industry": {
+                                        "description": "The industry of the account",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "annual_revenue": {
+                                        "description": "The annual revenue of the account",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "status": {
+                                        "description": "he status of the account",
+                                        "type": "string",
+                                        "enum": [
+                                            "active",
+                                            "inactive"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Accounts"
+                ],
+                "operationId": "102c60c5fd1e94be8c71c4efbeb51bf8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Accounts",
+            "description": "Operations about accounts"
+        }
+    ]
+}
