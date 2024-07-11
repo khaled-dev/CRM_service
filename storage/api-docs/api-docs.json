@@ -180,12 +180,198 @@
                     }
                 }
             }
+        },
+        "/api/activities": {
+            "get": {
+                "tags": [
+                    "Activities"
+                ],
+                "summary": "List activities",
+                "operationId": "53e7a0b67f6097ed90245000764b2e5e",
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Activities"
+                ],
+                "summary": "Create activity",
+                "operationId": "8aa12114961e22767ecdad7c24be367e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "contract_id": {
+                                        "description": "The contract_id of the activity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "outcome": {
+                                        "description": "The outcome of the activity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "date": {
+                                        "description": "The date of the activity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "note": {
+                                        "description": "note added on the activity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "type": {
+                                        "description": "the type of the activity",
+                                        "type": "string",
+                                        "enum": [
+                                            "call",
+                                            "email",
+                                            "meeting",
+                                            "demonstration"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/activities/{id}": {
+            "get": {
+                "tags": [
+                    "Activities"
+                ],
+                "summary": "Show activity",
+                "operationId": "6d75cdd5535b9b12358448ec198faba4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Activities"
+                ],
+                "summary": "Update activity",
+                "operationId": "064379988a5fe2c974ae5ab18f0cddfd",
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "contract_id": {
+                                        "description": "The contract_id of the activity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "outcome": {
+                                        "description": "The outcome of the activity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "date": {
+                                        "description": "The date of the activity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "note": {
+                                        "description": "note added on the activity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "type": {
+                                        "description": "the type of the activity",
+                                        "type": "string",
+                                        "enum": [
+                                            "call",
+                                            "email",
+                                            "meeting",
+                                            "demonstration"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Activities"
+                ],
+                "operationId": "d822403ad9a85feb951b1073858a072d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            }
         }
     },
     "tags": [
         {
             "name": "Accounts",
             "description": "Operations about accounts"
+        },
+        {
+            "name": "Activities",
+            "description": "Operations about Activities"
         }
     ]
 }
