@@ -119,6 +119,7 @@ class AccountController extends Controller
      * @OA\Delete(
      *     path="/api/accounts/{id}",
      *     tags={"Accounts"},
+     *     summary="Delete account",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

@@ -118,6 +118,7 @@ class ActivityController extends Controller
      * @OA\Delete(
      *     path="/api/activities/{id}",
      *     tags={"Activities"},
+     *     summary="Delete activity",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

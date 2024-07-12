@@ -23,7 +23,7 @@ class CustomerController extends Controller
      * @OA\Get(
      *     path="/api/customers",
      *     tags={"Customers"},
-     *     summary="List activities",
+     *     summary="List customers",
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -190,6 +190,7 @@ class CustomerController extends Controller
      * @OA\Delete(
      *     path="/api/customers/{id}",
      *     tags={"Customers"},
+     *     summary="Delete customer",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
