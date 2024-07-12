@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
-use Illuminate\Http\Response;
+use OpenApi\Annotations as OA;
 use App\Http\Resources\ActivityResource;
 use App\Http\Requests\Activity\StoreRequest;
 use App\Http\Requests\Activity\UpdateRequest;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use OpenApi\Annotations as OA;
 
 /**
  * @OA\Tag(name="Activities", description="Operations about Activities")
@@ -24,9 +22,13 @@ class ActivityController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function index(): AnonymousResourceCollection
+    public function index(): array
     {
-        return ActivityResource::collection(Activity::all());
+        return $this->generateResponse(
+            ActivityResource::collection(
+                Activity::all()
+            )
+        );
     }
 
     /**
@@ -51,12 +53,14 @@ class ActivityController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function store(StoreRequest $request): ActivityResource
+    public function store(StoreRequest $request): array
     {
         $activity = new Activity($request->validated());
         $activity->save();
 
-        return new ActivityResource($activity);
+        return $this->generateResponse(
+            new ActivityResource($activity)
+        );
     }
 
     /**
@@ -74,9 +78,11 @@ class ActivityController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function show(Activity $activity): ActivityResource
+    public function show(Activity $activity): array
     {
-        return new ActivityResource($activity);
+        return $this->generateResponse(
+            new ActivityResource($activity)
+        );
     }
 
     /**
@@ -107,11 +113,13 @@ class ActivityController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function update(UpdateRequest $request, Activity $activity): ActivityResource
+    public function update(UpdateRequest $request, Activity $activity): array
     {
         $activity->update($request->validated());
 
-        return new ActivityResource($activity);
+        return $this->generateResponse(
+            new ActivityResource($activity)
+        );
     }
 
     /**
@@ -129,10 +137,12 @@ class ActivityController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function destroy(Activity $activity): Response
+    public function destroy(Activity $activity): array
     {
         $activity->delete();
 
-        return response()->noContent();
+        return $this->generateResponse(
+            []
+        );
     }
 }

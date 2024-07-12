@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Resources\Concerns;
+namespace App\Http\Service;
 
+use ArrayAccess;
 
 class ResponseBuilder
 {
@@ -12,14 +13,13 @@ class ResponseBuilder
      */
     private $fullResponse = [];
 
-
     /**
      * Append resource's data.
      *
-     * @param array $data
+     * @param array|ArrayAccess $data
      * @return $this
      */
-    public function addData(array $data): ResponseBuilder
+    public function addData(array|ArrayAccess $data): ResponseBuilder
     {
         $this->fullResponse['data'] = $data;
 

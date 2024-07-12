@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ExceptionHandler;
 use App\Models\Account;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use App\Http\Resources\ContactResource;
 use App\Http\Requests\Contact\StoreRequest;
 use App\Http\Requests\Contact\UpdateRequest;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use OpenApi\Annotations as OA;
 
 /**
@@ -33,9 +32,13 @@ class ContactController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function index(Account $account): AnonymousResourceCollection
+    public function index(Account $account): array
     {
-        return ContactResource::collection($account->contacts()->get());
+        return $this->generateResponse(
+            ContactResource::collection(
+                $account->contacts()->get()
+            )
+        );
     }
 
     /**
@@ -65,11 +68,13 @@ class ContactController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function store(StoreRequest $request, Account $account): ContactResource
+    public function store(StoreRequest $request, Account $account): array
     {
         $contact = $account->contacts()->create($request->validated());
 
-        return new ContactResource($contact);
+        return $this->generateResponse(
+            new ContactResource($contact)
+        );
     }
 
     /**
@@ -83,18 +88,17 @@ class ContactController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function show(Account $account, Contact $contact): ContactResource|JsonResponse
+    public function show(Account $account, Contact $contact): JsonResponse|array
     {
         $is_exists = $account->contacts()->find($contact->getId());
 
         if (! $is_exists) {
-            return response()->json([
-                'success' => 'false',
-                'message' => 'Page Not Found',
-            ], 404);
+            return ExceptionHandler::pageNotFound();
         }
 
-        return new ContactResource($contact);
+        return $this->generateResponse(
+            new ContactResource($contact)
+        );
     }
 
     /**
@@ -120,20 +124,19 @@ class ContactController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function update(UpdateRequest $request, Account $account, Contact $contact): ContactResource|JsonResponse
+    public function update(UpdateRequest $request, Account $account, Contact $contact): JsonResponse|array
     {
         $is_exists = $account->contacts()->find($contact->getId());
 
         if (! $is_exists) {
-            return response()->json([
-                'success' => 'false',
-                'message' => 'Page Not Found',
-            ], 404);
+            return ExceptionHandler::pageNotFound();
         }
 
         $contact->update($request->validated());
 
-        return new ContactResource($contact);
+        return $this->generateResponse(
+            new ContactResource($contact)
+        );
     }
 
     /**
@@ -147,19 +150,18 @@ class ContactController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function destroy(Account $account,Contact $contact): Response|JsonResponse
+    public function destroy(Account $account,Contact $contact): JsonResponse|array
     {
         $is_exists = $account->contacts()->find($contact->getId());
 
         if (! $is_exists) {
-            return response()->json([
-                'success' => 'false',
-                'message' => 'Page Not Found',
-            ], 404);
+            return ExceptionHandler::pageNotFound();
         }
 
         $contact->delete();
 
-        return response()->noContent();
+        return $this->generateResponse(
+            []
+        );
     }
 }

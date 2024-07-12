@@ -3,8 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ContactResource extends BaseResource
+class ContactResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -13,8 +14,6 @@ class ContactResource extends BaseResource
      */
     public function toArray(Request $request): array
     {
-        return $this->generateResponse(
-            parent::toArray($request)
-        );
+        return parent::toArray($request);
     }
 }

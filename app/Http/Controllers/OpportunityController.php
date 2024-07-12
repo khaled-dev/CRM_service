@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lead;
 use App\Models\Opportunity;
-use Illuminate\Http\Response;
 use OpenApi\Annotations as OA;
 use App\Http\Resources\OpportunityResource;
 use App\Http\Requests\Opportunity\StoreRequest;
 use App\Http\Requests\Opportunity\UpdateRequest;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Tag(name="Opportunities", description="Operations about opportunity")
@@ -25,9 +22,13 @@ class OpportunityController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function index(): AnonymousResourceCollection
+    public function index(): array
     {
-        return OpportunityResource::collection(Opportunity::all());
+        return $this->generateResponse(
+            OpportunityResource::collection(
+                Opportunity::all()
+            )
+        );
     }
 
     /**
@@ -51,12 +52,14 @@ class OpportunityController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function store(StoreRequest $request): OpportunityResource
+    public function store(StoreRequest $request): array
     {
         $lead = new Opportunity($request->validated());
         $lead->save();
 
-        return new OpportunityResource($lead);
+        return $this->generateResponse(
+            new OpportunityResource($lead)
+        );
     }
 
     /**
@@ -74,9 +77,11 @@ class OpportunityController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function show(Opportunity $opportunity): OpportunityResource
+    public function show(Opportunity $opportunity): array
     {
-        return new OpportunityResource($opportunity);
+        return $this->generateResponse(
+            new OpportunityResource($opportunity)
+        );
     }
 
     /**
@@ -106,11 +111,13 @@ class OpportunityController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function update(UpdateRequest $request, Opportunity $opportunity): OpportunityResource
+    public function update(UpdateRequest $request, Opportunity $opportunity): array
     {
         $opportunity->update($request->validated());
 
-        return new OpportunityResource($opportunity);
+        return $this->generateResponse(
+            new OpportunityResource($opportunity)
+        );
     }
 
     /**
@@ -128,10 +135,12 @@ class OpportunityController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function destroy(Opportunity $opportunity): Response
+    public function destroy(Opportunity $opportunity): array
     {
         $opportunity->delete();
 
-        return response()->noContent();
+        return $this->generateResponse(
+            []
+        );
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use Illuminate\Http\Response;
 use OpenApi\Annotations as OA;
 use App\Http\Requests\CommentRequest;
 use App\Http\Resources\RequestResource;
@@ -12,7 +11,6 @@ use App\Http\Resources\CustomerResource;
 use App\Http\Requests\Customer\StoreRequest;
 use App\Http\Requests\Customer\UpdateRequest;
 use App\Http\Requests\Customer\RequestRequest;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Tag(name="Customers", description="Operations about customers")
@@ -28,9 +26,13 @@ class CustomerController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function index(): AnonymousResourceCollection
+    public function index(): array
     {
-        return CustomerResource::collection(Customer::all());
+        return $this->generateResponse(
+            CustomerResource::collection(
+                Customer::all()
+            )
+        );
     }
 
     /**
@@ -58,12 +60,14 @@ class CustomerController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function store(StoreRequest $request): CustomerResource
+    public function store(StoreRequest $request): array
     {
         $customer = new Customer($request->validated());
         $customer->save();
 
-        return new CustomerResource($customer);
+        return $this->generateResponse(
+            new CustomerResource($customer)
+        );
     }
 
     /**
@@ -90,11 +94,13 @@ class CustomerController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function addComment(CommentRequest $request, Customer $customer): CommentResource
+    public function addComment(CommentRequest $request, Customer $customer): array
     {
         $comment = $customer->comments()->create($request->all());
 
-        return new CommentResource($comment);
+        return $this->generateResponse(
+            new CommentResource($comment)
+        );
     }
 
     /**
@@ -121,11 +127,13 @@ class CustomerController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function addRequest(RequestRequest $request, Customer $customer): RequestResource
+    public function addRequest(RequestRequest $request, Customer $customer): array
     {
         $request = $customer->requests()->create($request->all());
 
-        return new RequestResource($request);
+        return $this->generateResponse(
+            new RequestResource($request)
+        );
     }
 
     /**
@@ -143,9 +151,11 @@ class CustomerController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function show(Customer $customer): CustomerResource
+    public function show(Customer $customer): array
     {
-        return new CustomerResource($customer);
+        return $this->generateResponse(
+            new CustomerResource($customer)
+        );
     }
 
     /**
@@ -179,11 +189,13 @@ class CustomerController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function update(UpdateRequest $request, Customer $customer): CustomerResource
+    public function update(UpdateRequest $request, Customer $customer): array
     {
         $customer->update($request->validated());
 
-        return new CustomerResource($customer);
+        return $this->generateResponse(
+            new CustomerResource($customer)
+        );
     }
 
     /**
@@ -201,10 +213,12 @@ class CustomerController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function destroy(Customer $customer): Response
+    public function destroy(Customer $customer): array
     {
         $customer->delete();
 
-        return response()->noContent();
+        return $this->generateResponse(
+            []
+        );
     }
 }

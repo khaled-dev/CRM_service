@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lead;
-use Illuminate\Http\Response;
 use OpenApi\Annotations as OA;
 use App\Http\Resources\LeadResource;
 use App\Http\Requests\CommentRequest;
@@ -11,7 +10,6 @@ use App\Http\Resources\CommentResource;
 use App\Http\Requests\Lead\StoreRequest;
 use App\Http\Requests\Lead\UpdateRequest;
 use App\Http\Requests\Lead\AssiginRequest;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Tag(name="Leads", description="Operations about leads")
@@ -27,9 +25,13 @@ class LeadController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function index(): AnonymousResourceCollection
+    public function index(): array
     {
-        return LeadResource::collection(Lead::all());
+        return $this->generateResponse(
+            LeadResource::collection(
+                Lead::all()
+            )
+        );
     }
 
     /**
@@ -54,12 +56,14 @@ class LeadController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function store(StoreRequest $request): LeadResource
+    public function store(StoreRequest $request): array
     {
         $lead = new Lead($request->validated());
         $lead->save();
 
-        return new LeadResource($lead);
+        return $this->generateResponse(
+            new LeadResource($lead)
+        );
     }
 
     /**
@@ -86,12 +90,14 @@ class LeadController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function assignUser(AssiginRequest $request, Lead $lead): LeadResource
+    public function assignUser(AssiginRequest $request, Lead $lead): array
     {
         $lead->assignedTo()->associate($request->toArray()['user_id']);
         $lead->save();
 
-        return new LeadResource($lead);
+        return $this->generateResponse(
+            new LeadResource($lead)
+        );
     }
 
     /**
@@ -118,11 +124,13 @@ class LeadController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function addComment(CommentRequest $request, Lead $lead): CommentResource
+    public function addComment(CommentRequest $request, Lead $lead): array
     {
         $comment = $lead->comments()->create($request->all());
 
-        return new CommentResource($comment);
+        return $this->generateResponse(
+            new CommentResource($comment)
+        );
     }
 
     /**
@@ -140,9 +148,11 @@ class LeadController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function show(Lead $lead): LeadResource
+    public function show(Lead $lead): array
     {
-        return new LeadResource($lead);
+        return $this->generateResponse(
+            new LeadResource($lead)
+        );
     }
 
     /**
@@ -173,11 +183,13 @@ class LeadController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function update(UpdateRequest $request, Lead $lead): LeadResource
+    public function update(UpdateRequest $request, Lead $lead): array
     {
         $lead->update($request->validated());
 
-        return new LeadResource($lead);
+        return $this->generateResponse(
+            new LeadResource($lead)
+        );
     }
 
     /**
@@ -195,10 +207,12 @@ class LeadController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function destroy(Lead $lead): Response
+    public function destroy(Lead $lead): array
     {
         $lead->delete();
 
-        return response()->noContent();
+        return $this->generateResponse(
+            []
+        );
     }
 }

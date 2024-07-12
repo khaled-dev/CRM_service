@@ -19,7 +19,7 @@ class ExceptionHandler
     /**
      * @return JsonResponse
      */
-    private function pageNotFound(): JsonResponse
+    public static function pageNotFound(): JsonResponse
     {
         return response()->json([
             'success' => 'false',

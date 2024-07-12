@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
-use Illuminate\Http\Response;
 use OpenApi\Annotations as OA;
 use App\Http\Resources\AccountResource;
 use App\Http\Requests\Account\StoreRequest;
 use App\Http\Requests\Account\UpdateRequest;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Tag(name="Accounts", description="Operations about accounts")
@@ -27,9 +25,13 @@ class AccountController extends Controller
      *     )
      * )
      */
-    public function index(): AnonymousResourceCollection
+    public function index(): array
     {
-        return AccountResource::collection(Account::all());
+        return $this->generateResponse(
+            AccountResource::collection(
+                Account::all()
+            )
+        );
     }
 
     /**
@@ -53,12 +55,14 @@ class AccountController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function store(StoreRequest $request): AccountResource
+    public function store(StoreRequest $request): array
     {
         $lead = new Account($request->validated());
         $lead->save();
 
-        return new AccountResource($lead);
+        return $this->generateResponse(
+            new AccountResource($lead)
+        );
     }
 
     /**
@@ -76,9 +80,11 @@ class AccountController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function show(Account $account): AccountResource
+    public function show(Account $account): array
     {
-        return new AccountResource($account);
+        return $this->generateResponse(
+            new AccountResource($account)
+        );
     }
 
     /**
@@ -108,11 +114,13 @@ class AccountController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function update(UpdateRequest $request, Account $account): AccountResource
+    public function update(UpdateRequest $request, Account $account): array
     {
         $account->update($request->validated());
 
-        return new AccountResource($account);
+        return $this->generateResponse(
+            new AccountResource($account)
+        );
     }
 
     /**
@@ -130,10 +138,12 @@ class AccountController extends Controller
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function destroy(Account $account): Response
+    public function destroy(Account $account): array
     {
         $account->delete();
 
-        return response()->noContent();
+        return $this->generateResponse(
+            []
+        );
     }
 }
