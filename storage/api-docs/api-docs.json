@@ -378,7 +378,7 @@
                 "tags": [
                     "Customers"
                 ],
-                "summary": "List activities",
+                "summary": "List customers",
                 "operationId": "2b23ac696cfd81c23807c2c1fd63b0b0",
                 "responses": {
                     "201": {
@@ -678,6 +678,303 @@
                     }
                 }
             }
+        },
+        "/api/leads": {
+            "get": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "List leads",
+                "operationId": "cf432797d721104851e99238ac60a81e",
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Create lead",
+                "operationId": "bc7019fff22a88cad209d84aab97322d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "The email of the lead",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "phone": {
+                                        "description": "The phone of the lead",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "source": {
+                                        "description": "The source of the lead",
+                                        "type": "string",
+                                        "enum": [
+                                            "website",
+                                            "referral",
+                                            "event"
+                                        ]
+                                    },
+                                    "interest_level": {
+                                        "description": "The interest level of the lead",
+                                        "type": "string",
+                                        "enum": [
+                                            "high",
+                                            "medium",
+                                            "low"
+                                        ]
+                                    },
+                                    "status": {
+                                        "description": "the status of the lead",
+                                        "type": "string",
+                                        "enum": [
+                                            "new",
+                                            "contacted",
+                                            "qualified",
+                                            "lost"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/leads/{id}/assign": {
+            "post": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Assign User to the lead",
+                "operationId": "74d63297117d7ca23d35075f7d08229f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "description": "The user assigned to the lead",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/leads/{id}/comments": {
+            "post": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Create comment on a lead",
+                "operationId": "7a070890ad2fba97b948c2fcb8d62c5d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "comment": {
+                                        "description": "The comment on the lead",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/leads/{id}": {
+            "get": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Show lead",
+                "operationId": "6426d81a2050c02e20aef8fcdc853bb7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Update lead",
+                "operationId": "78ee85715b78277d3af6f0c7a6f412e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "The email of the lead",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "phone": {
+                                        "description": "The phone of the lead",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "source": {
+                                        "description": "The source of the lead",
+                                        "type": "string",
+                                        "enum": [
+                                            "website",
+                                            "referral",
+                                            "event"
+                                        ]
+                                    },
+                                    "interest_level": {
+                                        "description": "The interest level of the lead",
+                                        "type": "string",
+                                        "enum": [
+                                            "high",
+                                            "medium",
+                                            "low"
+                                        ]
+                                    },
+                                    "status": {
+                                        "description": "the status of the lead",
+                                        "type": "string",
+                                        "enum": [
+                                            "new",
+                                            "contacted",
+                                            "qualified",
+                                            "lost"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Leads"
+                ],
+                "summary": "Delete lead",
+                "operationId": "972c87158c8eeb7b5ebefd52d273cd0a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -692,6 +989,10 @@
         {
             "name": "Customers",
             "description": "Operations about customers"
+        },
+        {
+            "name": "Leads",
+            "description": "Operations about leads"
         }
     ]
 }
