@@ -375,6 +375,223 @@
                 }
             }
         },
+        "/api/accounts/{account}/contacts": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "List contacts",
+                "operationId": "b91f32ab89c1a772a8951528db9f9f24",
+                "parameters": [
+                    {
+                        "name": "account",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Create contact",
+                "operationId": "e05e82dff8f271716cdc2f449567e82e",
+                "parameters": [
+                    {
+                        "name": "account",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The deal_value of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "email": {
+                                        "description": "The probability of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "phone": {
+                                        "description": "The source of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "position": {
+                                        "description": "The stage of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/accounts/{account}/contacts/{contact}": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Show opportunity",
+                "operationId": "1bf58f3fa9ecfc4e4604c176836741f0",
+                "parameters": [
+                    {
+                        "name": "account",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contact",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "contacts"
+                ],
+                "summary": "Update contact",
+                "operationId": "c89ee3fc4f4dca264b9f473510da232a",
+                "parameters": [
+                    {
+                        "name": "account",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contact",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The deal_value of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "email": {
+                                        "description": "The probability of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "phone": {
+                                        "description": "The source of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "position": {
+                                        "description": "The stage of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "contacts"
+                ],
+                "summary": "Delete contact",
+                "operationId": "dd91497ca13cded155bafdea8b3ad328",
+                "parameters": [
+                    {
+                        "name": "account",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contact",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            }
+        },
         "/api/customers": {
             "get": {
                 "tags": [
@@ -1177,6 +1394,10 @@
             "description": "Operations about Activities"
         },
         {
+            "name": "Contacts",
+            "description": "Operations about contact"
+        },
+        {
             "name": "Customers",
             "description": "Operations about customers"
         },
@@ -1187,6 +1408,10 @@
         {
             "name": "Opportunities",
             "description": "Operations about opportunity"
+        },
+        {
+            "name": "contacts",
+            "description": "contacts"
         }
     ]
 }
