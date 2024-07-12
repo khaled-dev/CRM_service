@@ -160,6 +160,7 @@
                 "tags": [
                     "Accounts"
                 ],
+                "summary": "Delete account",
                 "operationId": "102c60c5fd1e94be8c71c4efbeb51bf8",
                 "parameters": [
                     {
@@ -352,6 +353,7 @@
                 "tags": [
                     "Activities"
                 ],
+                "summary": "Delete activity",
                 "operationId": "d822403ad9a85feb951b1073858a072d",
                 "parameters": [
                     {
@@ -658,6 +660,7 @@
                 "tags": [
                     "Customers"
                 ],
+                "summary": "Delete customer",
                 "operationId": "634844e24d72540f608f7fd297f5d8b0",
                 "parameters": [
                     {
@@ -975,6 +978,193 @@
                     }
                 }
             }
+        },
+        "/api/opportunities": {
+            "get": {
+                "tags": [
+                    "Opportunities"
+                ],
+                "summary": "List opportunities",
+                "operationId": "6857d94b75c3afa8eba268a45c672f82",
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Opportunities"
+                ],
+                "summary": "Create opportunity",
+                "operationId": "efb8512731c0ffad2d0487e32caa886c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "deal_value": {
+                                        "description": "The deal_value of the opportunity",
+                                        "type": "integer",
+                                        "maxLength": 10
+                                    },
+                                    "probability": {
+                                        "description": "The probability of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "close_date": {
+                                        "description": "The source of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "stage": {
+                                        "description": "The stage of the opportunity",
+                                        "type": "string",
+                                        "enum": [
+                                            "qualification",
+                                            "needs analysis",
+                                            "proposal",
+                                            "negotiation",
+                                            "won",
+                                            "lost"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/opportunities/{id}": {
+            "get": {
+                "tags": [
+                    "Opportunities"
+                ],
+                "summary": "Show opportunity",
+                "operationId": "86a1d5f5226c855b557ee8199dca5e73",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Opportunities"
+                ],
+                "summary": "Update opportunity",
+                "operationId": "4db6fd6f8dde22509ec0e9f019990e12",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "deal_value": {
+                                        "description": "The deal_value of the opportunity",
+                                        "type": "integer",
+                                        "maxLength": 10
+                                    },
+                                    "probability": {
+                                        "description": "The probability of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "close_date": {
+                                        "description": "The source of the opportunity",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "stage": {
+                                        "description": "The stage of the opportunity",
+                                        "type": "string",
+                                        "enum": [
+                                            "qualification",
+                                            "needs analysis",
+                                            "proposal",
+                                            "negotiation",
+                                            "won",
+                                            "lost"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Opportunities"
+                ],
+                "summary": "Delete opportunity",
+                "operationId": "053728b08a36c8bf60a18067e23ef57b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request Successful"
+                    },
+                    "404": {
+                        "description": "Page Not Found"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -993,6 +1183,10 @@
         {
             "name": "Leads",
             "description": "Operations about leads"
+        },
+        {
+            "name": "Opportunities",
+            "description": "Operations about opportunity"
         }
     ]
 }

@@ -26,7 +26,7 @@ class UpdateRequest extends BaseRequest
         return [
             'contract_id' => 'nullable|string|max:255|exists:contracts,_id',
             'outcome' => 'nullable|string|max:255',
-            'date' => 'nullable|date',
+            'date' => 'nullable|date_format:Y-m-d',
             'note' => 'nullable|string|max:255',
             'type' => [
                 'nullable',

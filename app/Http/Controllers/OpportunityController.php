@@ -5,25 +5,51 @@ namespace App\Http\Controllers;
 use App\Models\Lead;
 use App\Models\Opportunity;
 use Illuminate\Http\Response;
-use App\Http\Resources\LeadResource;
+use OpenApi\Annotations as OA;
 use App\Http\Resources\OpportunityResource;
 use App\Http\Requests\Opportunity\StoreRequest;
 use App\Http\Requests\Opportunity\UpdateRequest;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
+/**
+ * @OA\Tag(name="Opportunities", description="Operations about opportunity")
+ */
 class OpportunityController extends Controller
 {
     /**
-     * @return AnonymousResourceCollection
+     * @OA\Get(
+     *     path="/api/opportunities",
+     *     tags={"Opportunities"},
+     *     summary="List opportunities",
+     *     @OA\Response(response="201", description="Request Successful"),
+     *     @OA\Response(response="400", description="Bad Request")
+     * )
      */
     public function index(): AnonymousResourceCollection
     {
-        return LeadResource::collection(Lead::all());
+        return OpportunityResource::collection(Opportunity::all());
     }
 
     /**
-     * @param StoreRequest $request
-     * @return OpportunityResource
+     * @OA\Post(
+     *     path="/api/opportunities",
+     *     tags={"Opportunities"},
+     *     summary="Create opportunity",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *              type="object",
+     *              properties={
+     *                  @OA\Property(property="deal_value", type="integer", description="The deal_value of the opportunity", maxLength=10),
+     *                  @OA\Property(property="probability", type="string", description="The probability of the opportunity", maxLength=255),
+     *                  @OA\Property(property="close_date", type="string", description="The source of the opportunity", maxLength=255),
+     *                  @OA\Property(property="stage", type="string", description="The stage of the opportunity", enum={"qualification", "needs analysis", "proposal", "negotiation", "won", "lost"}),
+     *             }
+     *         )
+     *     ),
+     *     @OA\Response(response="201", description="Request Successful"),
+     *     @OA\Response(response="400", description="Bad Request")
+     * )
      */
     public function store(StoreRequest $request): OpportunityResource
     {
@@ -34,8 +60,19 @@ class OpportunityController extends Controller
     }
 
     /**
-     * @param Opportunity $opportunity
-     * @return OpportunityResource
+     * @OA\Get(
+     *     path="/api/opportunities/{id}",
+     *     tags={"Opportunities"},
+     *     summary="Show opportunity",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response=200, description="Request Successful"),
+     *     @OA\Response(response=404, description="Page Not Found")
+     * )
      */
     public function show(Opportunity $opportunity): OpportunityResource
     {
@@ -43,9 +80,31 @@ class OpportunityController extends Controller
     }
 
     /**
-     * @param UpdateRequest $request
-     * @param Opportunity $opportunity
-     * @return OpportunityResource
+     * @OA\Put(
+     *     path="/api/opportunities/{id}",
+     *     tags={"Opportunities"},
+     *     summary="Update opportunity",
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(type="string")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=false,
+     *         @OA\JsonContent(
+     *              type="object",
+     *              properties={
+     *                  @OA\Property(property="deal_value", type="integer", description="The deal_value of the opportunity", maxLength=10),
+     *                  @OA\Property(property="probability", type="string", description="The probability of the opportunity", maxLength=255),
+     *                  @OA\Property(property="close_date", type="string", description="The source of the opportunity", maxLength=255),
+     *                  @OA\Property(property="stage", type="string", description="The stage of the opportunity", enum={"qualification", "needs analysis", "proposal", "negotiation", "won", "lost"}),
+     *             }
+     *         )
+     *     ),
+     *     @OA\Response(response="201", description="Request Successful"),
+     *     @OA\Response(response="400", description="Bad Request")
+     * )
      */
     public function update(UpdateRequest $request, Opportunity $opportunity): OpportunityResource
     {
@@ -55,8 +114,19 @@ class OpportunityController extends Controller
     }
 
     /**
-     * @param Opportunity $opportunity
-     * @return Response
+     * @OA\Delete(
+     *     path="/api/opportunities/{id}",
+     *     tags={"Opportunities"},
+     *     summary="Delete opportunity",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(response=200, description="Request Successful"),
+     *     @OA\Response(response=404, description="Page Not Found")
+     * )
      */
     public function destroy(Opportunity $opportunity): Response
     {

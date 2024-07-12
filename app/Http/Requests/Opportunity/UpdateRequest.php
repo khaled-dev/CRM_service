@@ -28,7 +28,7 @@ class UpdateRequest extends BaseRequest
             'probability' => 'nullable|string|max:255',
             'close_date' => 'nullable|date_format:Y-m-d',
             'stage' => [
-                'required',
+                'nullable',
                 'string',
                 Rule::in(Opportunity::STAGES)
             ],

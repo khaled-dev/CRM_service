@@ -26,7 +26,7 @@ class StoreRequest extends BaseRequest
         return [
             'contract_id' => 'required|string|max:255|exists:contracts,_id',
             'outcome' => 'required|string|max:255',
-            'date' => 'required|date',
+            'date' => 'required|date_format:Y-m-d',
             'note' => 'required|string|max:255',
             'type' => [
                 'required',
