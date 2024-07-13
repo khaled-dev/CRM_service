@@ -495,7 +495,7 @@
             },
             "put": {
                 "tags": [
-                    "contacts"
+                    "Contacts"
                 ],
                 "summary": "Update contact",
                 "operationId": "c89ee3fc4f4dca264b9f473510da232a",
@@ -560,7 +560,7 @@
             },
             "delete": {
                 "tags": [
-                    "contacts"
+                    "Contacts"
                 ],
                 "summary": "Delete contact",
                 "operationId": "dd91497ca13cded155bafdea8b3ad328",
@@ -1408,10 +1408,6 @@
         {
             "name": "Opportunities",
             "description": "Operations about opportunity"
-        },
-        {
-            "name": "contacts",
-            "description": "contacts"
         }
     ]
 }
