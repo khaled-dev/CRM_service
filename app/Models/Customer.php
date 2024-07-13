@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
 use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\HasMany;
 use MongoDB\Laravel\Relations\MorphMany;
 
@@ -14,7 +14,9 @@ class Customer extends Model
     protected $collection = 'customers';
 
     public const POTENTIAL = 'potential';
+
     public const CURRENT = 'current';
+
     public const STATUS = [self::POTENTIAL, self::CURRENT];
 
     /**
@@ -37,7 +39,6 @@ class Customer extends Model
      * comments...
      * pending requests..
      */
-
     protected $fillable = [
         'name',
         'company_name',
@@ -51,8 +52,6 @@ class Customer extends Model
 
     /**
      * the comments of this customer.
-     *
-     * @return MorphMany
      */
     public function comments(): MorphMany
     {
@@ -61,8 +60,6 @@ class Customer extends Model
 
     /**
      * the requests of this customer.
-     *
-     * @return HasMany
      */
     public function requests(): HasMany
     {

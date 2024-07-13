@@ -30,10 +30,10 @@ class StoreRequest extends BaseRequest
             'phone' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'country' => 'required|string|max:255',
-            'status'  => [
+            'status' => [
                 'required',
                 'string',
-                Rule::in(Customer::STATUS)
+                Rule::in(Customer::STATUS),
             ],
             'type' => 'required|string|max:255',
         ];

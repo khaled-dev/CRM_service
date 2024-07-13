@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ExceptionHandler;
+use App\Http\Requests\Contact\StoreRequest;
+use App\Http\Requests\Contact\UpdateRequest;
+use App\Http\Resources\ContactResource;
 use App\Models\Account;
 use App\Models\Contact;
 use Illuminate\Http\JsonResponse;
-use App\Http\Resources\ContactResource;
-use App\Http\Requests\Contact\StoreRequest;
-use App\Http\Requests\Contact\UpdateRequest;
 use OpenApi\Annotations as OA;
 
 /**
@@ -16,18 +16,20 @@ use OpenApi\Annotations as OA;
  */
 class ContactController extends Controller
 {
-
     /**
      * @OA\Get(
      *     path="/api/accounts/{account}/contacts",
      *     tags={"Contacts"},
      *     summary="List contacts",
+     *
      *     @OA\Parameter(
      *         name="account",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -46,17 +48,22 @@ class ContactController extends Controller
      *     path="/api/accounts/{account}/contacts",
      *     tags={"Contacts"},
      *     summary="Create contact",
+     *
      *     @OA\Parameter(
      *         name="account",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *              type="object",
      *              properties={
+     *
      *                  @OA\Property(property="name", type="string", description="The deal_value of the opportunity", maxLength=255),
      *                  @OA\Property(property="email", type="string", description="The probability of the opportunity", maxLength=255),
      *                  @OA\Property(property="phone", type="string", description="The source of the opportunity", maxLength=255),
@@ -64,6 +71,7 @@ class ContactController extends Controller
      *             }
      *         )
      *     ),
+     *
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -82,8 +90,10 @@ class ContactController extends Controller
      *     path="/api/accounts/{account}/contacts/{contact}",
      *     tags={"Contacts"},
      *     summary="Show opportunity",
+     *
      *     @OA\Parameter(name="account", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Parameter(name="contact", in="path", required=true, @OA\Schema(type="string")),
+     *
      *     @OA\Response(response=200, description="Request Successful"),
      *     @OA\Response(response=404, description="Page Not Found")
      * )
@@ -104,15 +114,19 @@ class ContactController extends Controller
     /**
      * @OA\Put(
      *     path="/api/accounts/{account}/contacts/{contact}",
-     *     tags={"contacts"},
+     *     tags={"Contacts"},
      *     summary="Update contact",
+     *
      *     @OA\Parameter(name="account", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Parameter(name="contact", in="path", required=true, @OA\Schema(type="string")),
+     *
      *     @OA\RequestBody(
      *         required=false,
+     *
      *         @OA\JsonContent(
      *              type="object",
      *              properties={
+     *
      *                  @OA\Property(property="name", type="string", description="The deal_value of the opportunity", maxLength=255),
      *                  @OA\Property(property="email", type="string", description="The probability of the opportunity", maxLength=255),
      *                  @OA\Property(property="phone", type="string", description="The source of the opportunity", maxLength=255),
@@ -120,6 +134,7 @@ class ContactController extends Controller
      *             }
      *         )
      *     ),
+     *
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -142,15 +157,17 @@ class ContactController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/accounts/{account}/contacts/{contact}",
-     *     tags={"contacts"},
+     *     tags={"Contacts"},
      *     summary="Delete contact",
+     *
      *     @OA\Parameter(name="account", in="path", required=true, @OA\Schema(type="string")),
      *     @OA\Parameter(name="contact", in="path", required=true, @OA\Schema(type="string")),
+     *
      *     @OA\Response(response=200, description="Request Successful"),
      *     @OA\Response(response=404, description="Page Not Found")
      * )
      */
-    public function destroy(Account $account,Contact $contact): JsonResponse|array
+    public function destroy(Account $account, Contact $contact): JsonResponse|array
     {
         $is_exists = $account->contacts()->find($contact->getId());
 

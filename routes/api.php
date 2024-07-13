@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\ActivityController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LeadController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LeadController;
 use App\Http\Controllers\OpportunityController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('customers')->controller(CustomerController::class)->group(function () {
     Route::get('/', 'index');
@@ -61,5 +61,3 @@ Route::prefix('/activities')->controller(ActivityController::class)->group(funct
     Route::put('/{activity}', 'update');
     Route::delete('/{activity}', 'destroy');
 });
-
-

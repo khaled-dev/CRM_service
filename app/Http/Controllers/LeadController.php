@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lead;
-use OpenApi\Annotations as OA;
-use App\Http\Resources\LeadResource;
 use App\Http\Requests\CommentRequest;
-use App\Http\Resources\CommentResource;
+use App\Http\Requests\Lead\AssiginRequest;
 use App\Http\Requests\Lead\StoreRequest;
 use App\Http\Requests\Lead\UpdateRequest;
-use App\Http\Requests\Lead\AssiginRequest;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\LeadResource;
+use App\Models\Lead;
+use OpenApi\Annotations as OA;
 
 /**
  * @OA\Tag(name="Leads", description="Operations about leads")
@@ -21,6 +21,7 @@ class LeadController extends Controller
      *     path="/api/leads",
      *     tags={"Leads"},
      *     summary="List leads",
+     *
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -39,11 +40,14 @@ class LeadController extends Controller
      *     path="/api/leads",
      *     tags={"Leads"},
      *     summary="Create lead",
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *              type="object",
      *              properties={
+     *
      *                  @OA\Property(property="email", type="string", description="The email of the lead", maxLength=255),
      *                  @OA\Property(property="phone", type="string", description="The phone of the lead", maxLength=255),
      *                  @OA\Property(property="source", type="string", description="The source of the lead", enum={"website", "referral", "event"}),
@@ -52,6 +56,7 @@ class LeadController extends Controller
      *             }
      *         )
      *     ),
+     *
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -71,21 +76,27 @@ class LeadController extends Controller
      *     path="/api/leads/{id}/assign",
      *     tags={"Leads"},
      *     summary="Assign User to the lead",
+     *
      *     @OA\Parameter(
      *          name="id",
      *          in="path",
      *          required=true,
+     *
      *          @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *              type="object",
      *              properties={
+     *
      *                  @OA\Property(property="user_id", type="string", description="The user assigned to the lead", maxLength=255)
      *             }
      *         )
      *     ),
+     *
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -105,21 +116,27 @@ class LeadController extends Controller
      *     path="/api/leads/{id}/comments",
      *     tags={"Leads"},
      *     summary="Create comment on a lead",
+     *
      *     @OA\Parameter(
      *          name="id",
      *          in="path",
      *          required=true,
+     *
      *          @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *              type="object",
      *              properties={
+     *
      *                  @OA\Property(property="comment", type="string", description="The comment on the lead", maxLength=255)
      *             }
      *         )
      *     ),
+     *
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -138,12 +155,15 @@ class LeadController extends Controller
      *     path="/api/leads/{id}",
      *     tags={"Leads"},
      *     summary="Show lead",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(response=200, description="Request Successful"),
      *     @OA\Response(response=404, description="Page Not Found")
      * )
@@ -160,17 +180,22 @@ class LeadController extends Controller
      *     path="/api/leads/{id}",
      *     tags={"Leads"},
      *     summary="Update lead",
+     *
      *     @OA\Parameter(
      *          name="id",
      *          in="path",
      *          required=true,
+     *
      *          @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\RequestBody(
      *         required=false,
+     *
      *         @OA\JsonContent(
      *              type="object",
      *              properties={
+     *
      *                   @OA\Property(property="email", type="string", description="The email of the lead", maxLength=255),
      *                   @OA\Property(property="phone", type="string", description="The phone of the lead", maxLength=255),
      *                   @OA\Property(property="source", type="string", description="The source of the lead", enum={"website", "referral", "event"}),
@@ -179,6 +204,7 @@ class LeadController extends Controller
      *             }
      *         )
      *     ),
+     *
      *     @OA\Response(response="201", description="Request Successful"),
      *     @OA\Response(response="400", description="Bad Request")
      * )
@@ -197,12 +223,15 @@ class LeadController extends Controller
      *     path="/api/leads/{id}",
      *     tags={"Leads"},
      *     summary="Delete lead",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="string")
      *     ),
+     *
      *     @OA\Response(response=200, description="Request Successful"),
      *     @OA\Response(response=404, description="Page Not Found")
      * )

@@ -16,9 +16,6 @@ class ExceptionHandler
         });
     }
 
-    /**
-     * @return JsonResponse
-     */
     public static function pageNotFound(): JsonResponse
     {
         return response()->json([

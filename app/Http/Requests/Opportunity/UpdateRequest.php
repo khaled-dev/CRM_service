@@ -30,7 +30,7 @@ class UpdateRequest extends BaseRequest
             'stage' => [
                 'nullable',
                 'string',
-                Rule::in(Opportunity::STAGES)
+                Rule::in(Opportunity::STAGES),
             ],
         ];
     }

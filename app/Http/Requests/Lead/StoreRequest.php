@@ -29,17 +29,17 @@ class StoreRequest extends BaseRequest
             'source' => [
                 'required',
                 'string',
-                Rule::in(Lead::SOURCES)
+                Rule::in(Lead::SOURCES),
             ],
             'interest_level' => [
                 'required',
                 'string',
-                Rule::in(Lead::INTERESTS)
+                Rule::in(Lead::INTERESTS),
             ],
             'status' => [
                 'required',
                 'string',
-                Rule::in(Lead::STATUS)
+                Rule::in(Lead::STATUS),
             ],
         ];
     }

@@ -28,10 +28,10 @@ class UpdateRequest extends BaseRequest
             'company_name' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:255',
-            'status'  => [
+            'status' => [
                 'nullable',
                 'string',
-                Rule::in(Customer::STATUS)
+                Rule::in(Customer::STATUS),
             ],
             'type' => 'nullable|string|max:255',
         ];

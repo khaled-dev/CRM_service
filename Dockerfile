@@ -20,6 +20,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Install application dependencies
 RUN composer install
 
+RUN composer global require laravel/pint
+ENV PATH=$PATH:/root/.composer/vendor/bin
+
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php", "artisan", "serve","--host=0.0.0.0","--port=9000"]

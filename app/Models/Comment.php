@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
 use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\MorphTo;
 
 class Comment extends Model
@@ -18,8 +18,6 @@ class Comment extends Model
 
     /**
      * Get the model that the comment belongs to.
-     *
-     * @return MorphTo
      */
     public function commentable(): MorphTo
     {

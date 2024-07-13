@@ -30,7 +30,7 @@ class StoreRequest extends BaseRequest
             'stage' => [
                 'required',
                 'string',
-                Rule::in(Opportunity::STAGES)
+                Rule::in(Opportunity::STAGES),
             ],
         ];
     }

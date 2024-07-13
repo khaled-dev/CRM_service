@@ -16,7 +16,6 @@ class ResponseBuilder
     /**
      * Append resource's data.
      *
-     * @param array|ArrayAccess $data
      * @return $this
      */
     public function addData(array|ArrayAccess $data): ResponseBuilder
@@ -29,7 +28,6 @@ class ResponseBuilder
     /**
      * Append resource's metadata.
      *
-     * @param array $metadata
      * @return $this
      */
     public function addMetadata(array $metadata = []): ResponseBuilder
@@ -42,7 +40,6 @@ class ResponseBuilder
     /**
      * Append resource's message.
      *
-     * @param string $message
      * @return $this
      */
     public function addMessage(string $message = 'Request Successful'): ResponseBuilder
@@ -55,7 +52,6 @@ class ResponseBuilder
     /**
      * Append resource's state.
      *
-     * @param bool $state
      * @return $this
      */
     public function addState(bool $state = true): ResponseBuilder
@@ -67,8 +63,6 @@ class ResponseBuilder
 
     /**
      * Build the response array
-     *
-     * @return array
      */
     public function build(): array
     {

@@ -30,7 +30,7 @@ class StoreRequest extends BaseRequest
             'status' => [
                 'required',
                 'string',
-                Rule::in(Account::STATUS)
+                Rule::in(Account::STATUS),
             ],
         ];
     }

@@ -31,7 +31,7 @@ class StoreRequest extends BaseRequest
             'type' => [
                 'required',
                 'string',
-                Rule::in(Activity::TYPES)
+                Rule::in(Activity::TYPES),
             ],
         ];
     }

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Laravel\Sanctum\HasApiTokens;
 use App\Models\Concerns\IdConverter;
+use Laravel\Sanctum\HasApiTokens;
 use MongoDB\Laravel\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -13,10 +13,12 @@ class User extends Authenticatable
     protected $collection = 'users';
 
     public const ADMIN = 'admin';
-    public const ACCOUNT_MANGER = 'account_manger';
-    public const SALESMAN = 'salesman';
-    public const STATUS = [self::ADMIN, self::ACCOUNT_MANGER, self::SALESMAN];
 
+    public const ACCOUNT_MANGER = 'account_manger';
+
+    public const SALESMAN = 'salesman';
+
+    public const STATUS = [self::ADMIN, self::ACCOUNT_MANGER, self::SALESMAN];
 
     /**
      * The attributes that are mass assignable.

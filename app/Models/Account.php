@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
 use App\Models\Concerns\IdConverter;
+use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsTo;
 use MongoDB\Laravel\Relations\HasMany;
 
@@ -14,7 +14,9 @@ class Account extends Model
     protected $collection = 'accounts';
 
     public const ACTIVE = 'active';
+
     public const INACTIVE = 'inactive';
+
     public const STATUS = [self::INACTIVE, self::ACTIVE];
 
     /**
@@ -29,8 +31,6 @@ class Account extends Model
     /**
      * Assigned To (salesperson or account manager)
      */
-
-
     protected $fillable = [
         'name',
         'industry',
@@ -40,8 +40,6 @@ class Account extends Model
 
     /**
      * the User assigned to this account.
-     *
-     * @return BelongsTo
      */
     public function assignedTo(): BelongsTo
     {
@@ -50,8 +48,6 @@ class Account extends Model
 
     /**
      * the contacts of this account.
-     *
-     * @return HasMany
      */
     public function contacts(): HasMany
     {

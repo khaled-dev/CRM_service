@@ -31,7 +31,7 @@ class UpdateRequest extends BaseRequest
             'type' => [
                 'nullable',
                 'string',
-                Rule::in(Activity::TYPES)
+                Rule::in(Activity::TYPES),
             ],
         ];
     }

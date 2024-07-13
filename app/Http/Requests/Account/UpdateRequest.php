@@ -30,7 +30,7 @@ class UpdateRequest extends BaseRequest
             'status' => [
                 'nullable',
                 'string',
-                Rule::in(Account::STATUS)
+                Rule::in(Account::STATUS),
             ],
         ];
     }

@@ -14,5 +14,4 @@ class Request extends Model
     protected $fillable = [
         'request',
     ];
-
 }

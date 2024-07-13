@@ -29,17 +29,17 @@ class UpdateRequest extends BaseRequest
             'source' => [
                 'nullable',
                 'string',
-                Rule::in(Lead::SOURCES)
+                Rule::in(Lead::SOURCES),
             ],
             'interest_level' => [
                 'nullable',
                 'string',
-                Rule::in(Lead::INTERESTS)
+                Rule::in(Lead::INTERESTS),
             ],
             'status' => [
                 'nullable',
                 'string',
-                Rule::in(Lead::STATUS)
+                Rule::in(Lead::STATUS),
             ],
         ];
     }
