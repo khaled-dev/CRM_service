@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Account\StoreRequest;
 use App\Http\Requests\Account\UpdateRequest;
+use App\Http\Requests\AssignRequest;
 use App\Http\Resources\AccountResource;
 use App\Models\Account;
 use OpenApi\Annotations as OA;
@@ -66,6 +67,46 @@ class AccountController extends Controller
 
         return $this->generateResponse(
             new AccountResource($lead)
+        );
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/accounts/{id}/assign",
+     *     tags={"Accounts"},
+     *     summary="Assign User to the account",
+     *
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *
+     *          @OA\Schema(type="string")
+     *     ),
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(
+     *              type="object",
+     *              properties={
+     *
+     *                  @OA\Property(property="user_id", type="string", description="The user assigned to the account", maxLength=255)
+     *             }
+     *         )
+     *     ),
+     *
+     *     @OA\Response(response="201", description="Request Successful"),
+     *     @OA\Response(response="400", description="Bad Request")
+     * )
+     */
+    public function assignUser(AssignRequest $request, Account $account): array
+    {
+        $account->assignedTo()->associate($request->toArray()['user_id']);
+        $account->save();
+
+        return $this->generateResponse(
+            new AccountResource($account)
         );
     }
 

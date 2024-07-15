@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AssignRequest;
 use App\Http\Requests\CommentRequest;
-use App\Http\Requests\Lead\AssiginRequest;
 use App\Http\Requests\Lead\StoreRequest;
 use App\Http\Requests\Lead\UpdateRequest;
 use App\Http\Resources\CommentResource;
@@ -101,7 +101,7 @@ class LeadController extends Controller
      *     @OA\Response(response="400", description="Bad Request")
      * )
      */
-    public function assignUser(AssiginRequest $request, Lead $lead): array
+    public function assignUser(AssignRequest $request, Lead $lead): array
     {
         $lead->assignedTo()->associate($request->toArray()['user_id']);
         $lead->save();
