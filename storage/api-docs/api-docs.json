@@ -70,6 +70,50 @@
                 }
             }
         },
+        "/api/accounts/{id}/assign": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Assign User to the account",
+                "operationId": "4455f6215e88f24b6a4d660ff7bc9ce5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "description": "The user assigned to the account",
+                                        "type": "string",
+                                        "maxLength": 255
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Request Successful"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
         "/api/accounts/{id}": {
             "get": {
                 "tags": [
