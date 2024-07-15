@@ -14,6 +14,13 @@ class OpportunityResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'deal_value' => $this->deal_value,
+            'stage' => $this->stage,
+            'close_date' => $this->close_date,
+            'probability' => $this->probability,
+            'lead' => new LeadResource($this->lead),
+        ];
     }
 }
