@@ -18,7 +18,7 @@ class User extends Authenticatable
 
     public const SALESMAN = 'salesman';
 
-    public const STATUS = [self::ADMIN, self::ACCOUNT_MANGER, self::SALESMAN];
+    public const TYPE = [self::ADMIN, self::ACCOUNT_MANGER, self::SALESMAN];
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +28,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'type',
         'password',
     ];
 
