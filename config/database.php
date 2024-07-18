@@ -41,6 +41,17 @@ return [
             //            'password' => env('DB_PASSWORD', 'password'),
         ],
 
+        'mongodb_test' => [
+            'driver' => 'mongodb',
+            'dsn' => 'mongodb://root:password@db:27017/language_bridge_crm_test?retryWrites=true&w=majority&authSource=admin',
+            'database' => env('DB_DATABASE', 'language_bridge_crm_test'),
+            //            'host'     => env('DB_HOST', '127.0.0.1'),
+            //            'port'     => env('DB_PORT', '27017'),
+            //            'database' => env('DB_DATABASE', 'language-bridge-crm'),
+            //            'username' => env('DB_USERNAME', 'root'),
+            //            'password' => env('DB_PASSWORD', 'password'),
+        ],
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
