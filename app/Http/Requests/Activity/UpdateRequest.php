@@ -24,7 +24,7 @@ class UpdateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'contract_id' => 'nullable|string|max:255|exists:contracts,_id',
+            'contact_id' => 'nullable|string|max:255|exists:contracts,_id',
             'outcome' => 'nullable|string|max:255',
             'date' => 'nullable|date_format:Y-m-d',
             'note' => 'nullable|string|max:255',

@@ -45,7 +45,7 @@ class ActivityController extends Controller
      *              type="object",
      *              properties={
      *
-     *                  @OA\Property(property="contract_id", type="string", description="The contract_id of the activity", maxLength=255),
+     *                  @OA\Property(property="contact_id", type="string", description="The contact_id of the activity", maxLength=255),
      *                  @OA\Property(property="outcome", type="string", description="The outcome of the activity", maxLength=255),
      *                  @OA\Property(property="date", type="string", description="The date of the activity", maxLength=255),
      *                  @OA\Property(property="note", type="string", description="note added on the activity", maxLength=255),
@@ -114,7 +114,7 @@ class ActivityController extends Controller
      *              type="object",
      *              properties={
      *
-     *                  @OA\Property(property="contract_id", type="string", description="The contract_id of the activity", maxLength=255),
+     *                  @OA\Property(property="contact_id", type="string", description="The contact_id of the activity", maxLength=255),
      *                  @OA\Property(property="outcome", type="string", description="The outcome of the activity", maxLength=255),
      *                  @OA\Property(property="date", type="string", description="The date of the activity", maxLength=255),
      *                  @OA\Property(property="note", type="string", description="note added on the activity", maxLength=255),

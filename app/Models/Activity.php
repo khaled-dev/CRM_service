@@ -20,6 +20,7 @@ class Activity extends Model
      * Contact ID: Identifier of the associated contact.
      */
     protected $fillable = [
+        'contact_id',
         'type',
         'outcome',
         'date',
