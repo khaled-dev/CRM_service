@@ -44,6 +44,7 @@ Route::prefix('accounts')->controller(AccountController::class)->group(function 
     Route::get('/{account}', 'show');
     Route::put('/{account}', 'update');
     Route::delete('/{account}', 'destroy');
+    Route::post('/{account}/assign', 'assignUser');
 
     Route::prefix('/{account}/contacts')->controller(ContactController::class)->group(function () {
         Route::get('/', 'index');
