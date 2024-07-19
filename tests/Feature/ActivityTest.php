@@ -44,7 +44,7 @@ class ActivityTest extends TestCase
     {
         $activity = $this->createActivity();
 
-        $response = $this->get('/api/activities/' . $activity->id);
+        $response = $this->get('/api/activities/'.$activity->id);
 
         $this->assertResponseStructure($response);
 
@@ -59,7 +59,7 @@ class ActivityTest extends TestCase
     // store
     public function test_create_activity_returns_a_successful_response()
     {
-        $mockContact = new Contact();
+        $mockContact = new Contact;
         $mockContact->save();
 
         $response = $this->post('/api/activities/', [
@@ -83,7 +83,7 @@ class ActivityTest extends TestCase
     {
         $activity = $this->createActivity();
 
-        $response = $this->put('/api/activities/' . $activity->id, [
+        $response = $this->put('/api/activities/'.$activity->id, [
             'outcome' => 'updated outcome',
             'type' => Activity::TYPE_EMAIL,
             'date' => '2020-07-19',

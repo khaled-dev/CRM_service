@@ -43,7 +43,7 @@ class OpportunityTest extends TestCase
     {
         $opportunity = $this->createOpportunity();
 
-        $response = $this->get('/api/opportunities/' . $opportunity->id);
+        $response = $this->get('/api/opportunities/'.$opportunity->id);
 
         $this->assertResponseStructure($response);
 
@@ -78,7 +78,7 @@ class OpportunityTest extends TestCase
     {
         $opportunity = $this->createOpportunity();
 
-        $response = $this->put('/api/opportunities/' . $opportunity->id, [
+        $response = $this->put('/api/opportunities/'.$opportunity->id, [
             'deal_value' => '7000',
             'stage' => Opportunity::STAGES[3],
             'close_date' => '2020-07-19',

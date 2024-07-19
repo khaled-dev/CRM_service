@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Customer;
-use App\Models\User;
 use Tests\TestCase;
 
 class CustomerTest extends TestCase
@@ -60,7 +59,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->createCustomer();
 
-        $response = $this->get('/api/customers/' . $customer->id);
+        $response = $this->get('/api/customers/'.$customer->id);
 
         $this->assertResponseStructure($response);
 
@@ -135,7 +134,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->createCustomer();
 
-        $response = $this->delete('/api/customers/' . $customer->id);
+        $response = $this->delete('/api/customers/'.$customer->id);
 
         $this->assertResponseStructure($response);
     }
@@ -145,7 +144,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->createCustomer();
 
-        $response = $this->post('/api/customers/' . $customer->id . '/comments', [
+        $response = $this->post('/api/customers/'.$customer->id.'/comments', [
             'comment' => 'test comment',
         ]);
 
@@ -159,7 +158,7 @@ class CustomerTest extends TestCase
     {
         $customer = $this->createCustomer();
 
-        $response = $this->post('/api/customers/' . $customer->id . '/requests', [
+        $response = $this->post('/api/customers/'.$customer->id.'/requests', [
             'request' => 'test request',
         ]);
 

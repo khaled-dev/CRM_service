@@ -11,7 +11,7 @@ class ContactTest extends TestCase
     // list
     public function test_contacts_returns_a_successful_response(): void
     {
-        $mockAccount = new Account();
+        $mockAccount = new Account;
         $mockAccount->save();
 
         $contactOne = $this->createContact($mockAccount, [
@@ -28,7 +28,7 @@ class ContactTest extends TestCase
             'position' => 'two position',
         ]);
 
-        $response = $this->get('/api/accounts/' . $mockAccount->id . '/contacts');
+        $response = $this->get('/api/accounts/'.$mockAccount->id.'/contacts');
 
         $this->assertResponseStructure($response);
 
@@ -45,12 +45,12 @@ class ContactTest extends TestCase
     // show
     public function test_one_contact_returns_a_successful_response(): void
     {
-        $mockAccount = new Account();
+        $mockAccount = new Account;
         $mockAccount->save();
 
         $contact = $this->createContact($mockAccount);
 
-        $response = $this->get('/api/accounts/' . $mockAccount->id . '/contacts/' . $contact->id);
+        $response = $this->get('/api/accounts/'.$mockAccount->id.'/contacts/'.$contact->id);
 
         $this->assertResponseStructure($response);
 
@@ -65,10 +65,10 @@ class ContactTest extends TestCase
     // store
     public function test_create_contact_returns_a_successful_response()
     {
-        $mockAccount = new Account();
+        $mockAccount = new Account;
         $mockAccount->save();
 
-        $response = $this->post('/api/accounts/' . $mockAccount->id . '/contacts/', [
+        $response = $this->post('/api/accounts/'.$mockAccount->id.'/contacts/', [
             'name' => 'a test name',
             'email' => 'a test email',
             'phone' => 'a test phone',
@@ -86,12 +86,12 @@ class ContactTest extends TestCase
     // put
     public function test_update_contact_returns_a_successful_response()
     {
-        $mockAccount = new Account();
+        $mockAccount = new Account;
         $mockAccount->save();
 
         $contact = $this->createContact($mockAccount);
 
-        $response = $this->put('/api/accounts/' . $mockAccount->id . '/contacts/' . $contact->id, [
+        $response = $this->put('/api/accounts/'.$mockAccount->id.'/contacts/'.$contact->id, [
             'name' => 'updated name',
             'email' => 'updated email',
             'phone' => 'updated phone',
@@ -109,12 +109,12 @@ class ContactTest extends TestCase
     // destroy
     public function test_delete_contact_returns_a_successful_response()
     {
-        $mockAccount = new Account();
+        $mockAccount = new Account;
         $mockAccount->save();
 
         $contact = $this->createContact($mockAccount);
 
-        $response = $this->delete('/api/accounts/' . $mockAccount->id . '/contacts/' . $contact->id);
+        $response = $this->delete('/api/accounts/'.$mockAccount->id.'/contacts/'.$contact->id);
 
         $this->assertResponseStructure($response);
     }

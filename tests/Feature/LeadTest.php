@@ -86,7 +86,7 @@ class LeadTest extends TestCase
     {
         $lead = $this->createLead();
 
-        $response = $this->put('/api/leads/' . $lead->id, [
+        $response = $this->put('/api/leads/'.$lead->id, [
             'source' => Lead::SOURCE_WEBSITE,
             'status' => Lead::STATUS_LOST,
             'phone' => 'updated phone number',
@@ -108,7 +108,7 @@ class LeadTest extends TestCase
     {
         $lead = $this->createLead();
 
-        $response = $this->delete('/api/leads/' . $lead->id);
+        $response = $this->delete('/api/leads/'.$lead->id);
 
         $this->assertResponseStructure($response);
     }
@@ -125,7 +125,7 @@ class LeadTest extends TestCase
 
         $lead = $this->createLead();
 
-        $response = $this->post('/api/leads/' . $lead->id . '/assign', [
+        $response = $this->post('/api/leads/'.$lead->id.'/assign', [
             'user_id' => $user->id,
         ]);
 
@@ -145,7 +145,7 @@ class LeadTest extends TestCase
     {
         $lead = $this->createLead();
 
-        $response = $this->post('/api/leads/' . $lead->id . '/comments', [
+        $response = $this->post('/api/leads/'.$lead->id.'/comments', [
             'comment' => 'test comment',
         ]);
 
