@@ -21,7 +21,7 @@ class LeadResource extends JsonResource
             'email' => $this->email,
             'status' => $this->status,
             'interest_level' => $this->interest_level,
-            'assigned_to' => new UserResource(assignedTo),
+            'assigned_to' => new UserResource($this->assignedTo),
             'comments' => CommentResource::collection($this->comments),
         ];
     }
