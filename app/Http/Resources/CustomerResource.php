@@ -24,8 +24,8 @@ class CustomerResource extends JsonResource
             'country' => $this->country,
             'status' => $this->status,
             'type' => $this->type,
-            'requests' => CommentResource::collection($this->comments),
-            'comments' => CommentResource::collection($this->type),
+            'requests' => RequestResource::collection($this->requests ?? []),
+            'comments' => CommentResource::collection($this->comments ?? []),
         ];
     }
 }

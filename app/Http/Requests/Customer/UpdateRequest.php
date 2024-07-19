@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Customer;
 
 use App\Http\Requests\BaseRequest;
-use App\Models\Lead;
+use App\Models\Customer;
 use Illuminate\Validation\Rule;
 
 class UpdateRequest extends BaseRequest
@@ -24,23 +24,18 @@ class UpdateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'email' => 'nullable|string|email|max:255',
+            'name' => 'nullable|string|max:255',
+            'company_name' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:255',
-            'source' => [
-                'nullable',
-                'string',
-                Rule::in(Lead::SOURCES),
-            ],
-            'interest_level' => [
-                'nullable',
-                'string',
-                Rule::in(Lead::INTERESTS),
-            ],
+            'email' => 'nullable|string|email|max:255',
+            'country' => 'nullable|string|max:255',
             'status' => [
                 'nullable',
                 'string',
-                Rule::in(Lead::STATUS),
+                Rule::in(Customer::STATUS),
             ],
+            'type' => 'nullable|string|max:255',
         ];
     }
 }
