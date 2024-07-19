@@ -150,7 +150,7 @@ class CustomerTest extends TestCase
         ]);
 
         $this->assertResponseStructure($response);
-        
+
         $this->assertEquals($customer->comments[0]->comment, $response['data']['comment']);
     }
 
