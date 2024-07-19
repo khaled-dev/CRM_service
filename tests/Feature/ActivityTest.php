@@ -2,10 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Account;
 use App\Models\Activity;
 use App\Models\Contact;
-use App\Models\User;
 use Tests\TestCase;
 
 class ActivityTest extends TestCase

@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\Account;
 use App\Models\User;
-use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 class AccountTest extends TestCase
