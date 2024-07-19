@@ -106,7 +106,7 @@ class AccountTest extends TestCase
         $this->assertAccountResponseStructure($response);
     }
 
-    // store
+    // assign
     public function test_assign_user_to_account_returns_a_successful_response()
     {
         $user = new User([
@@ -130,19 +130,6 @@ class AccountTest extends TestCase
         $this->assertEquals($user->name, $response['data']['assigned_to']['name']);
         $this->assertEquals($user->type, $response['data']['assigned_to']['type']);
 
-    }
-
-    private function assertAccountResponseStructure(TestResponse $response): void
-    {
-        $response->assertJsonStructure([
-            'state',
-            'message',
-            'data',
-            'metadata',
-        ])
-            ->assertJsonPath('state', true)
-            ->assertJsonPath('message', 'Request Successful')
-            ->assertStatus(200);
     }
 
     private function createAccount(array $attributes = []): Account

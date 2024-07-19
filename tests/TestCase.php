@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Testing\TestResponse;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -12,5 +13,18 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->refreshDatabase();
+    }
+
+    protected function assertAccountResponseStructure(TestResponse $response): void
+    {
+        $response->assertJsonStructure([
+            'state',
+            'message',
+            'data',
+            'metadata',
+        ])
+            ->assertJsonPath('state', true)
+            ->assertJsonPath('message', 'Request Successful')
+            ->assertStatus(200);
     }
 }
