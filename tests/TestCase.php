@@ -15,7 +15,7 @@ abstract class TestCase extends BaseTestCase
         $this->refreshDatabase();
     }
 
-    protected function assertAccountResponseStructure(TestResponse $response): void
+    protected function assertResponseStructure(TestResponse $response): void
     {
         $response->assertJsonStructure([
             'state',

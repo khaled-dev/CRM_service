@@ -27,7 +27,7 @@ class ActivityTest extends TestCase
 
         $response = $this->get('/api/activities');
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals($activityOne->outcome, $response['data'][0]['outcome']);
         $this->assertEquals($activityTwo->outcome, $response['data'][1]['outcome']);
@@ -46,7 +46,7 @@ class ActivityTest extends TestCase
 
         $response = $this->get('/api/activities/' . $activity->id);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals($activity->id, $response['data']['id']);
         $this->assertEquals($activity->outcome, $response['data']['outcome']);
@@ -70,7 +70,7 @@ class ActivityTest extends TestCase
             'note' => 'a test note',
         ]);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals('a test outcome', $response['data']['outcome']);
         $this->assertEquals(Activity::TYPE_EMAIL, $response['data']['type']);
@@ -90,7 +90,7 @@ class ActivityTest extends TestCase
             'note' => 'updated note',
         ]);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals('updated outcome', $response['data']['outcome']);
         $this->assertEquals(Activity::TYPE_EMAIL, $response['data']['type']);
@@ -110,7 +110,7 @@ class ActivityTest extends TestCase
 
         $response = $this->delete('/api/activities/'.$activity->id);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
     }
 
     private function createActivity(array $attributes = []): Activity

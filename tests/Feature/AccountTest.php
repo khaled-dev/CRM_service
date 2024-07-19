@@ -27,7 +27,7 @@ class AccountTest extends TestCase
 
         $response = $this->get('/api/accounts');
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals($accountOne->name, $response['data'][0]['name']);
         $this->assertEquals($accountTwo->name, $response['data'][1]['name']);
@@ -42,7 +42,7 @@ class AccountTest extends TestCase
 
         $response = $this->get('/api/accounts/'.$account->id);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals($account->id, $response['data']['id']);
         $this->assertEquals($account->name, $response['data']['name']);
@@ -62,7 +62,7 @@ class AccountTest extends TestCase
             'status' => Account::INACTIVE,
         ]);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals('test name', $response['data']['name']);
         $this->assertEquals('test industry', $response['data']['industry']);
@@ -82,7 +82,7 @@ class AccountTest extends TestCase
             'status' => Account::ACTIVE,
         ]);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals('updated name', $response['data']['name']);
         $this->assertEquals('updated industry', $response['data']['industry']);
@@ -102,7 +102,7 @@ class AccountTest extends TestCase
 
         $response = $this->delete('/api/accounts/'.$account->id);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
     }
 
     // assign
@@ -121,7 +121,7 @@ class AccountTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals($account->name, $response['data']['name']);
         $this->assertEquals($account->industry, $response['data']['industry']);

@@ -26,7 +26,7 @@ class OpportunityTest extends TestCase
 
         $response = $this->get('/api/opportunities');
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals($opportunityOne->deal_value, $response['data'][0]['deal_value']);
         $this->assertEquals($opportunityTwo->deal_value, $response['data'][1]['deal_value']);
@@ -45,7 +45,7 @@ class OpportunityTest extends TestCase
 
         $response = $this->get('/api/opportunities/' . $opportunity->id);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals($opportunity->id, $response['data']['id']);
         $this->assertEquals($opportunity->deal_value, $response['data']['deal_value']);
@@ -65,7 +65,7 @@ class OpportunityTest extends TestCase
             'probability' => 'new probability',
         ]);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals('3000', $response['data']['deal_value']);
         $this->assertEquals(Opportunity::STAGES[2], $response['data']['stage']);
@@ -85,7 +85,7 @@ class OpportunityTest extends TestCase
             'probability' => 'updated probability',
         ]);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
 
         $this->assertEquals('7000', $response['data']['deal_value']);
         $this->assertEquals(Opportunity::STAGES[3], $response['data']['stage']);
@@ -100,7 +100,7 @@ class OpportunityTest extends TestCase
 
         $response = $this->delete('/api/opportunities/'.$opportunity->id);
 
-        $this->assertAccountResponseStructure($response);
+        $this->assertResponseStructure($response);
     }
 
     private function createOpportunity(array $attributes = []): Opportunity
